@@ -3,7 +3,7 @@ import { useFrame } from "@react-three/fiber";
 import { useState, useRef } from "react";
 import { Mesh } from "three";
 
-const Plane = () => {
+const Spider = () => {
     const [isDead, setIsDead] = useState(false);
     const spider = useTexture("/images/spider.bmp");
     const deadSpider = useTexture("/images/mak3.bmp");
@@ -62,6 +62,6 @@ const Plane = () => {
     );
 };
 
-export default Plane;
+export default Spider;
 
 useTexture.preload(["/images/spider.bmp", "/images/mak3.bmp"]);

@@ -1,7 +1,7 @@
 import { Text, useTexture } from "@react-three/drei";
 import { FC } from "react";
 
-const LoadingScreen: FC<{ setStart: (val: boolean) => void }> = ({
+const SpiderLoadingScreen: FC<{ setStart: (val: boolean) => void }> = ({
     setStart,
 }) => {
     const spider = useTexture("/images/spider1.bmp");
@@ -24,4 +24,4 @@ const LoadingScreen: FC<{ setStart: (val: boolean) => void }> = ({
     );
 };
 
-export default LoadingScreen;
+export default SpiderLoadingScreen;
