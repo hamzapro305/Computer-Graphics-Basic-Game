@@ -1,6 +1,13 @@
 import { Canvas } from "@react-three/fiber";
+import Ghost from "./Ghost";
+import { useAppSelector } from "../Redux/Hooks";
+import { Text } from "@react-three/drei";
+import GhostLoadingScreen from "./GhostLoadingScreen";
+import { useState } from "react";
 
 const GhostGame = () => {
+    const [start, setStart] = useState(false);
+    const { Ghosts: ghosts, killed } = useAppSelector((s) => s.Ghost);
     return (
         <Canvas
             orthographic
@@ -18,6 +25,15 @@ const GhostGame = () => {
                 <boxGeometry args={[20, 20, 0.1, 1, 1]} />
                 <meshStandardMaterial color="white" />
             </mesh>
+            {start && (
+                <Text position={[-8, -9, 0]} color="red">
+                    Killed {killed}
+                </Text>
+            )}
+            {ghosts.map((g) => (
+                <Ghost key={g.id} gh={g} />
+            ))}
+            {!start && <GhostLoadingScreen setStart={setStart} />}
         </Canvas>
     );
 };
