@@ -1,6 +1,6 @@
-import { OrbitControls } from "@react-three/drei";
 import { Canvas } from "@react-three/fiber";
 import Plane from "./Plane";
+import { OrbitControls } from "@react-three/drei";
 
 const App = () => {
     return (
@@ -21,7 +21,7 @@ const App = () => {
                     position: [0, 0, 10],
                 }}
             >
-                {/* <OrbitControls /> */}
+                <OrbitControls />
                 <ambientLight intensity={2} />
                 <Plane />
                 <mesh position={[0, 0, -10]}>
