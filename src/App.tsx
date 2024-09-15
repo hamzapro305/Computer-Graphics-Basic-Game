@@ -1,8 +1,11 @@
 import { Canvas } from "@react-three/fiber";
 import Plane from "./Plane";
 import { OrbitControls } from "@react-three/drei";
+import LoadingScreen from "./LoadingScreen";
+import { useState } from "react";
 
 const App = () => {
+    const [isStart, setIsStart] = useState(false);
     return (
         <main
             style={{
@@ -21,13 +24,14 @@ const App = () => {
                     position: [0, 0, 10],
                 }}
             >
-                <OrbitControls />
+                {/* <OrbitControls /> */}
                 <ambientLight intensity={2} />
                 <Plane />
                 <mesh position={[0, 0, -10]}>
                     <boxGeometry args={[20, 20, 0.1, 1, 1]} />
                     <meshStandardMaterial color="white" />
                 </mesh>
+                {!isStart && <LoadingScreen setStart={setIsStart} />}
             </Canvas>
         </main>
     );
