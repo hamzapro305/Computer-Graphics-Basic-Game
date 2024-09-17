@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Canvas } from "@react-three/fiber";
 import {
     KeyboardControls,
+    KeyboardControlsEntry,
     OrbitControls,
 } from "@react-three/drei";
 import Mario from "./Mario";
@@ -14,7 +15,7 @@ export enum MarioControls {
     jump = "jump",
 }
 
-const map = [
+const map: KeyboardControlsEntry<MarioControls>[] = [
     { name: MarioControls.forward, keys: ["ArrowUp", "KeyW"] },
     { name: MarioControls.back, keys: ["ArrowDown", "KeyS"] },
     { name: MarioControls.left, keys: ["ArrowLeft", "KeyA"] },
