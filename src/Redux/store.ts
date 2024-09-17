@@ -1,9 +1,11 @@
 import { configureStore } from "@reduxjs/toolkit";
 import GhostSlice from "./slices/GhostSlice";
+import SpiderSlice from "./slices/SpiderSlice";
 
 export const store = configureStore({
     reducer: {
         Ghost: GhostSlice,
+        Spider: SpiderSlice,
     },
     middleware: (getDefaultMiddleware) =>
         getDefaultMiddleware({

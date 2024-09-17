@@ -1,10 +1,6 @@
 import { useState } from "react";
 import { Canvas } from "@react-three/fiber";
-import {
-    KeyboardControls,
-    KeyboardControlsEntry,
-    OrbitControls,
-} from "@react-three/drei";
+import { KeyboardControls, KeyboardControlsEntry } from "@react-three/drei";
 import Mario from "./Mario";
 
 export enum MarioControls {

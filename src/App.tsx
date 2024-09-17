@@ -13,9 +13,9 @@ const App = () => {
                     background: "radial-gradient(#292929, #000000)",
                 }}
             >
-                {/* <SpiderGame /> */}
+                <SpiderGame />
                 {/* <GhostGame /> */}
-                <MarioGame />
+                {/* <MarioGame /> */}
             </main>
         </StoreProvider>
     );
