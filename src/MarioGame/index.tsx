@@ -38,7 +38,7 @@ const MarioGame = () => {
                 }}
             >
                 <ambientLight intensity={2} />
-                <OrbitControls />
+                {/* <OrbitControls /> */}
                 <Mario state={state} setState={setState} />
                 <mesh position={[0, 0, -10]}>
                     <boxGeometry args={[20, 20, 0.1]} />

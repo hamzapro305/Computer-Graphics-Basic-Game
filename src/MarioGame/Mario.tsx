@@ -33,6 +33,8 @@ const Mario: FC<any> = ({ state, setState }) => {
     } else if (state === "JUMP") currentTexture = textures.jump;
     else if (state === "DIE") currentTexture = textures.die;
 
+    const speed = 10;
+
     useFrame((_, delta) => {
         if (!marioRef.current) return;
 
@@ -43,28 +45,30 @@ const Mario: FC<any> = ({ state, setState }) => {
         if (right) {
             setState("RUN");
             marioRef.current.scale.x = 1;
-            velocity[0] = 0.05; // Move right
+            velocity[0] = 0.05 * speed; // Move right
         } else if (left) {
             setState("RUN");
             marioRef.current.scale.x = -1;
-            velocity[0] = -0.05; // Move left
+            velocity[0] = -0.05 * speed; // Move left
         } else {
             setState("STAY");
             velocity[0] = 0;
         }
 
-        // Handle jumping
-        if (jump && marioRef.current.position.y === -5) {
-            setState("JUMP");
-            velocity[1] = 0.1; // Jump upwards
-        }
-
         // Apply gravity if Mario is above the ground
         if (marioRef.current.position.y > -5) {
             velocity[1] -= 0.01; // Gravity effect
+            setState("JUMP");
         } else {
             marioRef.current.position.y = -5;
+            setState("STAY");
             velocity[1] = 0; // Stop vertical movement at ground
+        }
+
+        // Handle jumping
+        if (jump && marioRef.current.position.y === -5) {
+            setState("JUMP");
+            velocity[1] = 0.4; // Jump upwards
         }
 
         // Update position based on velocity
@@ -92,7 +96,7 @@ const Mario: FC<any> = ({ state, setState }) => {
 
     return (
         <mesh ref={marioRef}>
-            <planeGeometry args={[1, 1]} />
+            <planeGeometry args={[5, 5]} />
             <meshBasicMaterial map={currentTexture} transparent />
         </mesh>
     );
