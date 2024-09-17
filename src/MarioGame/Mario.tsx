@@ -6,8 +6,9 @@ import { Mesh } from "three";
 
 const Mario: FC<any> = ({ state, setState }) => {
     const [sub, get] = useKeyboardControls<MarioControls>();
-    const [position, setPosition] = useState([0, -5, 0]);
-    const [velocity, setVelocity] = useState([0, 0]);
+
+    // Ref for velocity (no need for useState here)
+    const velocityRef = useRef<[number, number]>([0, 0]);
     const [runAnimationFrame, setRunAnimationFrame] = useState(0);
     const [runFrameTime, setRunFrameTime] = useState(0);
 
@@ -33,39 +34,42 @@ const Mario: FC<any> = ({ state, setState }) => {
     else if (state === "DIE") currentTexture = textures.die;
 
     useFrame((_, delta) => {
-        const { forward, back, left, right, jump } = get();
+        if (!marioRef.current) return;
+
+        const { left, right, jump } = get();
+        let velocity = velocityRef.current;
 
         // Handle running left and right
         if (right) {
             setState("RUN");
-            setVelocity([0.05, velocity[1]]); // Move right
+            marioRef.current.scale.x = 1;
+            velocity[0] = 0.05; // Move right
         } else if (left) {
             setState("RUN");
-            setVelocity([-0.05, velocity[1]]); // Move left
+            marioRef.current.scale.x = -1;
+            velocity[0] = -0.05; // Move left
         } else {
             setState("STAY");
-            setVelocity([0, velocity[1]]);
+            velocity[0] = 0;
         }
 
         // Handle jumping
-        if (jump && position[1] === -5) {
+        if (jump && marioRef.current.position.y === -5) {
             setState("JUMP");
-            setVelocity([velocity[0], 0.1]); // Jump upwards
+            velocity[1] = 0.1; // Jump upwards
         }
 
         // Apply gravity if Mario is above the ground
-        if (position[1] > -5) {
-            setVelocity([velocity[0], velocity[1] - 0.01]); // Gravity effect
+        if (marioRef.current.position.y > -5) {
+            velocity[1] -= 0.01; // Gravity effect
         } else {
-            setPosition([position[0], -5, position[2]]); // Stop at ground level
+            marioRef.current.position.y = -5;
+            velocity[1] = 0; // Stop vertical movement at ground
         }
 
         // Update position based on velocity
-        setPosition((prev) => [
-            prev[0] + velocity[0],
-            prev[1] + velocity[1],
-            prev[2],
-        ]);
+        marioRef.current.position.x += velocity[0];
+        marioRef.current.position.y += velocity[1];
 
         // Run animation logic: cycle through RUN1, RUN2, RUN3
         if (state === "RUN") {
@@ -87,7 +91,7 @@ const Mario: FC<any> = ({ state, setState }) => {
     }, [sub]);
 
     return (
-        <mesh ref={marioRef} position={position as any}>
+        <mesh ref={marioRef}>
             <planeGeometry args={[1, 1]} />
             <meshBasicMaterial map={currentTexture} transparent />
         </mesh>
