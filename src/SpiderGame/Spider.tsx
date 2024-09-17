@@ -10,7 +10,7 @@ const Spider = () => {
     const spiderRef = useRef<Mesh>(null);
     const [Position, setPosition] = useState({ x: 0, y: 0 });
     const speed = 0.02;
-    
+
     const generateRandomXY = () => [
         Math.random() * 20 - 10,
         Math.random() * 20 - 10,

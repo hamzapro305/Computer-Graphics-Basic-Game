@@ -1,7 +1,8 @@
 import { useKeyboardControls, useTexture } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
-import { FC, useEffect, useState } from "react";
+import { FC, useEffect, useRef, useState } from "react";
 import { MarioControls } from ".";
+import { Mesh } from "three";
 
 const Mario: FC<any> = ({ state, setState }) => {
     const [sub, get] = useKeyboardControls<MarioControls>();
@@ -9,6 +10,8 @@ const Mario: FC<any> = ({ state, setState }) => {
     const [velocity, setVelocity] = useState([0, 0]);
     const [runAnimationFrame, setRunAnimationFrame] = useState(0);
     const [runFrameTime, setRunFrameTime] = useState(0);
+
+    const marioRef = useRef<Mesh>(null);
 
     // Load Mario textures
     const textures = useTexture({
@@ -84,7 +87,7 @@ const Mario: FC<any> = ({ state, setState }) => {
     }, [sub]);
 
     return (
-        <mesh position={position as any}>
+        <mesh ref={marioRef} position={position as any}>
             <planeGeometry args={[1, 1]} />
             <meshBasicMaterial map={currentTexture} transparent />
         </mesh>
