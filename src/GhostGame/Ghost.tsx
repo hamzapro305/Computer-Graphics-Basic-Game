@@ -11,8 +11,8 @@ const generateRandomXY = () => [
 ];
 
 const Ghost: FC<{ gh: { id: string; status: "BASIC" | "RED" } }> = ({ gh }) => {
-    const skull = useTexture("/images/skull.png");
-    const redSkull = useTexture("/images/red-skull.png");
+    const skull = useTexture("/images/skull/skull.png");
+    const redSkull = useTexture("/images/skull/red-skull.png");
     const dispatch = useAppDispatch();
     const ghostRef = useRef<Mesh>(null);
     const [Position, setPosition] = useState(() => {

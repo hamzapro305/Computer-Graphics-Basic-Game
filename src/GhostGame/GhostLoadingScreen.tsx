@@ -4,7 +4,7 @@ import { FC } from "react";
 const GhostLoadingScreen: FC<{ setStart: (val: boolean) => void }> = ({
     setStart,
 }) => {
-    const ghost = useTexture("/images/skullGif.gif");
+    const ghost = useTexture("/images/skull/skullGif.gif");
 
     return (
         <group position={[0, 0, -5]} onClick={() => setStart(true)}>

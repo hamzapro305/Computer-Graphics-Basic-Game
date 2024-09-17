@@ -1,7 +1,7 @@
 import { Canvas } from "@react-three/fiber";
 import Ghost from "./Ghost";
 import { useAppSelector } from "../Redux/Hooks";
-import { Text } from "@react-three/drei";
+import { OrbitControls, Text } from "@react-three/drei";
 import GhostLoadingScreen from "./GhostLoadingScreen";
 import { useState } from "react";
 

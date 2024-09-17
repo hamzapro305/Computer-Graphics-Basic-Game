@@ -1,4 +1,5 @@
 import GhostGame from "./GhostGame";
+import MarioGame from "./MarioGame";
 import StoreProvider from "./Redux/StoreProvider";
 import SpiderGame from "./SpiderGame";
 
@@ -13,7 +14,8 @@ const App = () => {
                 }}
             >
                 {/* <SpiderGame /> */}
-                <GhostGame />
+                {/* <GhostGame /> */}
+                <MarioGame />
             </main>
         </StoreProvider>
     );

@@ -15,7 +15,7 @@ export const Slice = createSlice({
     initialState,
     reducers: {
         addGhost: (state) => {
-            if (state.Ghosts.length < 30) {
+            if (state.Ghosts.length < 3) {
                 state.Ghosts.push({ id: nanoid(), status: "BASIC" });
             }
         },

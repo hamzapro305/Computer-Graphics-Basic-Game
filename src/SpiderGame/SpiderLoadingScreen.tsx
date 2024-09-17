@@ -4,7 +4,7 @@ import { FC } from "react";
 const SpiderLoadingScreen: FC<{ setStart: (val: boolean) => void }> = ({
     setStart,
 }) => {
-    const spider = useTexture("/images/spider1.bmp");
+    const spider = useTexture("/images/spider/spider1.bmp");
 
     return (
         <group position={[0, 0, -5]} onClick={() => setStart(true)}>

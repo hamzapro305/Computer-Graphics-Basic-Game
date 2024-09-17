@@ -5,8 +5,8 @@ import { Mesh } from "three";
 
 const Spider = () => {
     const [isDead, setIsDead] = useState(false);
-    const spider = useTexture("/images/spider.bmp");
-    const deadSpider = useTexture("/images/mak3.bmp");
+    const spider = useTexture("/images/spider/spider.bmp");
+    const deadSpider = useTexture("/images/spider/mak3.bmp");
     const spiderRef = useRef<Mesh>(null);
     const [Position, setPosition] = useState({ x: 0, y: 0 });
     const speed = 0.02;
